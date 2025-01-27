@@ -28,16 +28,18 @@ Route::post('/fotos/{fotoId}/like', [LikeFotoController::class, 'toggleLike'])->
 
 // Rute untuk Dashboard
 Route::get('/', [HomeController::class, 'dashboard'])->name('dashboard');
+Route::get('/about', [HomeController::class, 'about'])->name('about');
+Route::get('/album', [HomeController::class, 'album'])->name('album');
 Route::get('/dashboardUsers', [HomeController::class, 'index'])->name('dashboardUsers');  // Rute untuk dashboard pengguna
-
-// Rute untuk About
-Route::get('/about', function () {
-    return view('dashboard_gallery.about');
-});
 
 // Rute untuk Otentikasi
 Auth::routes();
 
+
+// Rute untuk About
+// Route::get('/about', function () {
+//     return view('dashboard_gallery.about');
+// });
 // Test route (dikomentari, dapat dihapus jika sudah tidak diperlukan)
 // Route::get('/', function () {
 //     return view('dashboard_gallery.home');

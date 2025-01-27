@@ -29,13 +29,10 @@
                         <a class="nav-link nav-link-1 active" aria-current="page" href="{{ route('dashboard') }}">Beranda</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link nav-link-1" aria-current="page" href="/about">Tentang</a>
+                        <a class="nav-link nav-link-1" aria-current="page" href="{{route('about')}}">Tentang</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link nav-link-2" href="videos.html">Video</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link nav-link-3" href="/about">Album</a>
+                        <a class="nav-link nav-link-3" href="{{ route('album') }}">Album</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link nav-link-4" href="contact.html">Kontak</a>

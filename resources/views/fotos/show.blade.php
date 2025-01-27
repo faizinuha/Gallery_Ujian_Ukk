@@ -38,11 +38,15 @@
                             <div>
                                 <p><strong>Judul:</strong> {{ $foto->JudulFoto }}</p>
                                 <p><strong>Deskripsi:</strong> {{ $foto->DeskripsiFoto }}</p>
+                                
                                 <!-- Livewire Like & Dislike Component -->
                                 @livewire('likedan-dislike', ['fotoId' => $foto->FotoID, 'userId' => auth()->user()->UserID])
-                                <!-- Jumlah Like & Dislike -->
-
-                            </div>
+                            
+                                <!-- Tombol Download Gambar -->
+                                <a href="{{ asset('storage/' . $foto->LokasiFile) }}" download="{{ $foto->JudulFoto }}.jpg" class="btn btn-primary">
+                                    Download Gambar
+                                </a>
+                            </div>                            
                         </div>
                     </div>
                     <div class="card-footer bg-light">
@@ -50,19 +54,12 @@
                         <form action="{{ route('komentar_foto.store', $foto) }}" method="POST">
                             @csrf
                             <textarea name="IsiKomentar" class="form-control mb-3" rows="2" placeholder="Tulis komentar Anda..."></textarea>
-                            <button type="submit" class="btn btn-success btn-sm"><i class="fas fa-paper-plane"></i>
-                                Kirim</button>
-                        </form>
-                        @foreach ($komentars as $comment)
-                        <div class="mb-3 border-bottom pb-2">
-                            <strong>{{ $comment->user->username }}:</strong>
-                            <p class="mb-1">Context:{{ $comment->IsiKomentar }}</p>
-                            <small class="text-muted">{{ $comment->created_at->format('d M Y H:i') }}</small>
-                            <!-- Tombol Edit Komentar -->
-                            @livewire('komentar', ['fotoId' => $foto->FotoID, 'userId' => auth()->user()->UserID])
-                        </div>
-                    @endforeach
-                    </div>
+                            <button type="submit" class="btn btn-success btn-sm"><i class="fas fa-paper-plane"></i> Kirim</button>
+                        </form>   
+                        <!-- Menampilkan komentar menggunakan komponen Livewire -->
+                        @livewire('komentar', ['fotoId' => $foto->FotoID, 'userId' => auth()->user()->UserID])
+                        {{-- <livewire:komentar :FotoID="$FotoID" :userId="auth()->id()" /> --}}
+                    </div>                    
                 </div>
             </div>
         </div>
@@ -114,5 +111,4 @@
             margin-top: 10px;
         }
     </style>
-
 @endsection

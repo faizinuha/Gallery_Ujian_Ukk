@@ -36,9 +36,27 @@ class HomeController extends Controller
     // Add your other controller methods here...
     public function dashboard()
     {
-        $a = Album::all(); // Get all albums
-        $p = Foto::all(); // Get all photos
+        $a = Album::all(); // Get all albums (all albums)
+        $p = Foto::paginate(12); // Get photos with pagination (12 per page)
         return view('dashboard_gallery.home', compact('a', 'p'));
     }
+        
+    public function album()
+    {
+        // Mengambil semua album beserta foto terbaru terkait
+        $albums = Album::with(['fotos' => function($query) {
+            $query->latest()->limit(1); // Hanya ambil foto terbaru per album
+        }])->get();
+    
+        return view('dashboard_gallery.albums', compact('albums'));
+    }
+    
 
+
+
+
+    public function about()
+    {
+        return view('dashboard_gallery.about');
+    }
 }

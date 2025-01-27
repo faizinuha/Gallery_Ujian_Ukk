@@ -61,4 +61,15 @@ class KomentarFotoController extends Controller
         ]);
         return response()->json(['success' => true, 'message' => 'Komentar berhasil diubah.']);
     }
+    public function edit($id)
+    {
+        $comment = KomentarFoto::findOrFail($id);
+
+        // Pastikan hanya pemilik komentar yang bisa mengedit
+        if ($comment->UserID !== Auth::id()) {
+            return redirect()->route('komentar.index')->with('error', 'Anda tidak memiliki izin untuk mengedit komentar ini.');
+        }
+
+        return view('komentar.edit', compact('comment'));
+    }
 }
