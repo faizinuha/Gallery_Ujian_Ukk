@@ -30,7 +30,7 @@ Sebuah galeri foto open-source untuk keperluan pembelajaran dan kolaborasi.
 
 ---
   <video controls width="32%">
-    <source src="Laravel - Gallery.mp4" type="video/mp4">
+    <source src="https://github.com/faizinuha/Gallery_Ujian_Ukk/blob/main/Laravel%20-%20Gallery.mp4" type="video/mp4">
     Your browser does not support the video tag.
   </video>
 
