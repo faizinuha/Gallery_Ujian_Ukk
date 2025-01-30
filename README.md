@@ -18,7 +18,6 @@ Sebuah galeri foto open-source untuk keperluan pembelajaran dan kolaborasi.
 - 📱 Responsif untuk Semua Device
 
 ---
-
 ## 🎨 Preview Galeri  
 <div align="center">
   <img src="https://raw.githubusercontent.com/faizinuha/Gallery_Ujian_Ukk/main/public/Documentasi_gallery/1.jpeg" width="32%">
@@ -30,6 +29,10 @@ Sebuah galeri foto open-source untuk keperluan pembelajaran dan kolaborasi.
 </div>
 
 ---
+  <video controls width="32%">
+    <source src="Laravel - Gallery.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
 
 ## 🛠️ Instalasi & Penggunaan  
 ```bash
