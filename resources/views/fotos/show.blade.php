@@ -3,21 +3,6 @@
 @section('content')
     <!-- Tambahkan Font Awesome untuk ikon -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
-
-    @if (session('success'))
-        <!-- Toast Notification -->
-        <div class="bs-toast toast fade show bg-success" role="alert" aria-live="assertive" aria-atomic="true">
-            <div class="toast-header">
-                <i class="fas fa-check-circle me-2"></i>
-                <strong class="me-auto">Sukses</strong>
-                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-            </div>
-            <div class="toast-body">
-                {{ session('success') }}
-            </div>
-        </div>
-    @endif
-
     <div class="container mt-4">
         <div class="row justify-content-center">
             <div class="col-md-10">
@@ -51,15 +36,75 @@
                     </div>
                     <div class="card-footer bg-light">
                         <!-- Form Tambah Komentar -->
-                        <form action="{{ route('komentar_foto.store', $foto) }}" method="POST">
+                        <form action="{{ route('komentar_foto.store', $foto->FotoID) }}" method="POST" class="mb-3">
                             @csrf
                             <textarea name="IsiKomentar" class="form-control mb-3" rows="2" placeholder="Tulis komentar Anda..."></textarea>
                             <button type="submit" class="btn btn-success btn-sm"><i class="fas fa-paper-plane"></i> Kirim</button>
-                        </form>   
-                        <!-- Menampilkan komentar menggunakan komponen Livewire -->
-                        @livewire('komentar', ['fotoId' => $foto->FotoID, 'userId' => auth()->user()->UserID])
-                        {{-- <livewire:komentar :FotoID="$FotoID" :userId="auth()->id()" /> --}}
-                    </div>                    
+                        </form>
+                    
+                        <!-- Menampilkan daftar komentar -->
+                        @foreach ($komentars as $komentar)
+                            <div class="border p-2 mb-2">
+                                <strong>{{ $komentar->user->username }}:</strong>
+                                <p class="mb-1">Context:{{ $komentar->IsiKomentar }}</p>
+                                <small class="text-muted">{{ $komentar->created_at->format('d M Y H:i') }}</small>
+                    
+                                @if (auth()->id() === $komentar->UserID)
+                                    <!-- Tombol Edit -->
+                                    <button type="button" class="btn btn-warning btn-sm" onclick="editKomentar({{ $komentar->KomentarID }}, '{{ $komentar->IsiKomentar }}')">
+                                        <i class="fas fa-edit"></i> Edit
+                                    </button>
+                    
+                                    <!-- Form Hapus -->
+                                    <form action="{{ route('komentar_foto.destroy', ['foto' => $foto->FotoID, 'komentar' => $komentar->KomentarID]) }}" method="POST" class="d-inline">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger btn-sm">
+                                            <i class="fas fa-trash"></i> Hapus
+                                        </button>
+                                    </form>
+                                @endif
+                            </div>
+                        @endforeach
+                    </div>
+                    
+                    <!-- Modal Edit Komentar -->
+                    <div class="modal fade" id="editKomentarModal" tabindex="-1" aria-labelledby="editKomentarModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="editKomentarModalLabel">Edit Komentar</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form id="editKomentarForm" method="POST">
+                                        @csrf
+                                        @method('PUT')
+                                        <textarea id="editIsiKomentar" name="IsiKomentar" class="form-control mb-3" rows="2"></textarea>
+                                        <button type="submit" class="btn btn-primary">
+                                            <i class="fas fa-save"></i> Simpan Perubahan
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <script>
+                        function editKomentar(id, isi) {
+                            // Set nilai textarea di modal dengan isi komentar yang akan diedit
+                            document.getElementById('editIsiKomentar').value = isi;
+                    
+                            // Set action form edit ke route yang sesuai dengan komentar yang dipilih
+                            document.getElementById('editKomentarForm').action = `/foto/{{ $foto->FotoID }}/komentar/${id}`;
+                    
+                            // Tampilkan modal
+                            var modal = new bootstrap.Modal(document.getElementById('editKomentarModal'));
+                            modal.show();
+                        }
+                    </script>
+                    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+                    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>                                      
                 </div>
             </div>
         </div>
@@ -67,12 +112,7 @@
 
     <style>
         /* Toast Styling */
-        .toast {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 1055;
-        }
+      
 
         /* Card Styling */
         .card-header {

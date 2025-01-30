@@ -17,7 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('FotoID');
             $table->unsignedBigInteger('UserID');
             $table->text('IsiKomentar');
-            $table->date('TanggalKomentar');
+            $table->timestamp('TanggalKomentar');
             $table->timestamps();
 
             $table->foreign('FotoID')->references('FotoID')->on('fotos')->onDelete('cascade');

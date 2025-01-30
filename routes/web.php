@@ -15,14 +15,11 @@ Route::resource('albums', AlbumController::class);
 // Rute untuk Foto (Hanya untuk pengguna yang sudah login)
 Route::resource('fotos', FotosController::class)->middleware('auth');
 
-// Rute untuk Komentar Foto
-Route::prefix('foto/{foto}')->group(function() {
-    Route::get('komentar', [KomentarFotoController::class, 'show'])->name('komentar_foto.show');
-    Route::post('komentar', [KomentarFotoController::class, 'store'])->name('komentar_foto.store')->middleware('auth');  // Middleware untuk otentikasi
-    Route::delete('komentar/{komentar}', [KomentarFotoController::class, 'destroy'])->name('komentar_foto.destroy')->middleware('auth');  // Middleware untuk otentikasi
-    Route::put('komentar/{komentar}', [KomentarFotoController::class, 'update'])->name('komentar_foto.update')->middleware('auth');  // Middleware untuk otentikasi
-});
-
+// Routes untuk komentar
+Route::get('foto/{foto}/komentar', [KomentarFotoController::class, 'show'])->name('komentar_foto.show');
+Route::post('foto/{foto}/komentar', [KomentarFotoController::class, 'store'])->name('komentar_foto.store')->middleware('auth');
+Route::delete('foto/{foto}/komentar/{komentar}', [KomentarFotoController::class, 'destroy'])->name('komentar_foto.destroy')->middleware('auth');
+Route::put('foto/{foto}/komentar/{komentar}', [KomentarFotoController::class, 'update'])->name('komentar_foto.update')->middleware('auth');
 // Rute untuk Like Foto
 Route::post('/fotos/{fotoId}/like', [LikeFotoController::class, 'toggleLike'])->name('fotos.like')->middleware('auth');  // Middleware untuk otentikasi
 

@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Models\KomentarFoto;
@@ -9,67 +8,68 @@ use Illuminate\Support\Facades\Auth;
 
 class KomentarFotoController extends Controller
 {
-    // Menampilkan komentar-komentar pada foto tertentu
     public function show($fotoId)
     {
         $foto = Foto::findOrFail($fotoId);
         $komentars = KomentarFoto::where('FotoID', $fotoId)->get();
 
-        return view('Komentar.show', compact('foto', 'komentars'));
+        return view('fotos.show', compact('foto', 'komentars'));
     }
-
-    // Menambahkan komentar pada foto tertentu
+    // Menambahkan komentar baru ke dalam foto
     public function store(Request $request, $fotoId)
     {
         $request->validate([
             'IsiKomentar' => 'required|string|max:1000',
         ]);
-
+    
         KomentarFoto::create([
             'FotoID' => $fotoId,
             'UserID' => Auth::id(),
             'IsiKomentar' => $request->IsiKomentar,
             'TanggalKomentar' => now(),
         ]);
-
-        return redirect()->route('fotos.show', $fotoId)->with('success', 'Komentar berhasil ditambahkan!');
+    
+        return redirect()->route('fotos.show', $fotoId)
+                         ->with('success', 'Komentar berhasil ditambahkan!');
     }
 
-
-    public function destroy(Foto $foto, KomentarFoto $komentar)
+    public function destroy($fotoId, $komentarId)
     {
-        // Pastikan komentar terkait dengan foto yang benar dan komentar milik pengguna yang sedang login
-        if ($komentar->FotoID === $foto->FotoID && $komentar->UserID === Auth::id()) {
-            $komentar->delete();  // Hapus komentar jika cocok
-        } else {
-            // Jika komentar bukan milik pengguna yang sedang login
-            return redirect()->route('fotos.show', $foto)->with('error', 'Anda tidak dapat menghapus komentar ini.');
+        // Cek apakah komentar ada dan milik user yang sedang login
+        $komentar = KomentarFoto::where('KomentarID', $komentarId)
+                                ->where('FotoID', $fotoId)
+                                ->first();
+    
+        if (!$komentar) {
+            return redirect()->back()->with('error', 'Komentar tidak ditemukan.');
         }
+    
+        if ($komentar->UserID == Auth::id()) {
+            $komentar->delete();
+            return redirect()->route('fotos.show', $fotoId)->with('success', 'Komentar berhasil dihapus!');
+        }
+    
+        return redirect()->route('fotos.show', $fotoId)->with('error', 'Anda tidak dapat menghapus komentar ini.');
+    }    
 
-        // Redirect kembali dengan pesan sukses
-        return redirect()->route('fotos.show', $foto)->with('success', 'Komentar berhasil dihapus!');
-    }
-    public function update(Request $request, KomentarFoto $komentarFoto){
-        if ($komentarFoto->UserID !== Auth::id()) {
-            return response()->json(['success' => false, 'message' => 'Anda tidak memiliki akses untuk mengedit komentar ini.'], 403);
-        }
+    public function update(Request $request, $fotoId, $komentarId)
+    {
         $request->validate([
-            'IsiKomentar' =>'required|string|max:1000',
+            'IsiKomentar' => 'required|string|max:1000',
         ]);
-        $komentarFoto->validate([
-            'komentar'  =>'required|string|max:1000',
-        ]);
-        return response()->json(['success' => true, 'message' => 'Komentar berhasil diubah.']);
-    }
-    public function edit($id)
-    {
-        $comment = KomentarFoto::findOrFail($id);
-
+    
+        $komentar = KomentarFoto::findOrFail($komentarId);
+    
         // Pastikan hanya pemilik komentar yang bisa mengedit
-        if ($comment->UserID !== Auth::id()) {
-            return redirect()->route('komentar.index')->with('error', 'Anda tidak memiliki izin untuk mengedit komentar ini.');
+        if ($komentar->UserID !== Auth::id()) {
+            return redirect()->route('fotos.show', $fotoId)->with('error', 'Anda tidak memiliki izin untuk mengedit komentar ini.');
         }
-
-        return view('komentar.edit', compact('comment'));
+    
+        $komentar->update([
+            'IsiKomentar' => $request->IsiKomentar,
+            'TanggalKomentar' => now(),
+        ]);
+    
+        return redirect()->route('fotos.show', $fotoId)->with('success', 'Komentar berhasil diperbarui!');
     }
 }

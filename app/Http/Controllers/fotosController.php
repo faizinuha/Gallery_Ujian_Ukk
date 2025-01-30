@@ -62,7 +62,7 @@ class FotosController extends Controller
         $komentars = KomentarFoto::where('FotoID', $id)->get(); // Mengambil semua komentar untuk foto tertentu
         return view('fotos.show', compact('foto', 'komentars')); // Pastikan untuk memakai plural untuk komentar
     }
-
+    
     // Menampilkan form untuk mengedit foto
     public function edit($id)
     {
