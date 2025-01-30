@@ -51,10 +51,6 @@ class HomeController extends Controller
         return view('dashboard_gallery.albums', compact('albums'));
     }
     
-
-
-
-
     public function about()
     {
         return view('dashboard_gallery.about');

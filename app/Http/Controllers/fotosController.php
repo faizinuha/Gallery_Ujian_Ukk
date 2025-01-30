@@ -10,7 +10,14 @@ use App\Models\KomentarFoto;
 
 class FotosController extends Controller
 {
-   
+
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+        $fotos = Foto::where('JudulFoto', 'LIKE', '%' . $query . '%')->get();
+
+        return view('fotos.search', compact('fotos', 'query'));
+    }
     // Menampilkan daftar foto berdasarkan Album dan User yang sedang login
     public function index()
     {
@@ -59,8 +66,9 @@ class FotosController extends Controller
     public function show($id)
     {
         $foto = Foto::findOrFail($id);
+        $fotos = Foto::all();
         $komentars = KomentarFoto::where('FotoID', $id)->get(); // Mengambil semua komentar untuk foto tertentu
-        return view('fotos.show', compact('foto', 'komentars')); // Pastikan untuk memakai plural untuk komentar
+        return view('fotos.show', compact('foto', 'komentars','fotos')); // Pastikan untuk memakai plural untuk komentar
     }
     
     // Menampilkan form untuk mengedit foto

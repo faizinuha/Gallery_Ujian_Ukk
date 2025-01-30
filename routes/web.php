@@ -14,6 +14,7 @@ Route::resource('albums', AlbumController::class);
 
 // Rute untuk Foto (Hanya untuk pengguna yang sudah login)
 Route::resource('fotos', FotosController::class)->middleware('auth');
+Route::get('/search', [FotosController::class, 'search'])->name('fotos.search');
 
 // Routes untuk komentar
 Route::get('foto/{foto}/komentar', [KomentarFotoController::class, 'show'])->name('komentar_foto.show');

@@ -32,6 +32,9 @@
                         <a class="nav-link nav-link-1" aria-current="page" href="{{route('about')}}">Tentang</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link nav-link-1" aria-current="page" href="#">All</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link nav-link-3" href="{{ route('album') }}">Album</a>
                     </li>
                     <li class="nav-item">
@@ -60,8 +63,8 @@
 
     <!-- Hero Section (Search Bar) -->
     <div class="tm-hero d-flex justify-content-center align-items-center" data-parallax="scroll" data-image-src="img/hero.jpg">
-        <form class="d-flex tm-search-form">
-            <input class="form-control tm-search-input" type="search" placeholder="Search" aria-label="Search">
+        <form class="d-flex tm-search-form" action="{{ route('fotos.search') }}" method="GET">
+            <input class="form-control tm-search-input" type="search" name="query" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-success tm-search-btn" type="submit">
                 <i class="fas fa-search"></i>
             </button>
