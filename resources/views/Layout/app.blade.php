@@ -75,5 +75,21 @@
             alert('hello');
         });
     </script>
+     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+     <script>
+         $(document).ready(function () {
+             $(document).keydown(function (e) {
+                 if (e.which === 123) { 
+                     return false;
+                 }
+             });
+             
+     
+             $(document).on("contextmenu", function (e) {
+                 e.preventDefault(); // Blokir klik kanan
+                 alert('Maaf Gamar Tidak Bisa di Inpect');
+             });
+         });
+     </script>
 </body>
 </html>

@@ -21,7 +21,7 @@
             @forelse ($p as $a)
                 <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-10 mb-3">
                     <figure class="effect-ming tm-video-item">
-                        <img src="{{ asset('storage/' . $a->LokasiFile) }}" alt="{{ $a->JudulFoto }}" class="img-fluid">
+                        <img src="{{ asset('storage/' . $a->LokasiFile) }}" alt="{{ $a->JudulFoto }}" class="img-fluid" >
                         <figcaption class="d-flex align-items-center justify-content-center">
                             <h2>{{ $a->JudulFoto }}</h2>
                             <a href="{{ route('fotos.show', $a->FotoID) }}">View more</a>
@@ -160,4 +160,5 @@
             font-weight: bold;
         }
     </style>
+ 
 @endsection
