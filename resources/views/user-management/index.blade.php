@@ -21,9 +21,9 @@
                         <div class="row">
                             @foreach($albums as $album)
                                 <div class="col-md-4 mb-4">
-                                    <div class="card shadow-sm border-light rounded">
+                                    <div class="card shadow-sm rounded">
                                         <div class="card-header bg-primary text-white">
-                                            <strong>{{ $album->name }}</strong>
+                                            <strong>{{ $album->NamaAlbum }}</strong>
                                         </div>
                                         <div class="card-body">
                                             <p>{{ $album->description }}</p>

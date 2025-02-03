@@ -135,7 +135,7 @@
                 <a href="{{ $p->previousPageUrl() }}" class="btn btn-primary tm-btn-prev mb-2 {{ !$p->previousPageUrl() ? 'disabled' : '' }}">
                     Previous
                 </a>
-        
+
                 <!-- Page Numbers -->
                 <div class="tm-paging d-flex">
                     @foreach ($p->getUrlRange(1, $p->lastPage()) as $page => $url)
@@ -144,14 +144,14 @@
                         </a>
                     @endforeach
                 </div>
-        
+
                 <!-- Next Button -->
                 <a href="{{ $p->nextPageUrl() }}" class="btn btn-primary tm-btn-next {{ !$p->nextPageUrl() ? 'disabled' : '' }}">
                     Next Page
                 </a>
             </div>
         </div>
-                        
+
     </div> <!-- container-fluid, tm-container-content -->
     <style>
         .tm-video-item figcaption h2 {
@@ -160,5 +160,5 @@
             font-weight: bold;
         }
     </style>
- 
+
 @endsection

@@ -42,8 +42,21 @@
                     </li>
                     @if (Route::has('login'))
                         @auth
-                        <li class="nav-item">
-                            <a class="nav-link nav-link-4" href="{{ route('dashboardUsers') }}">Dashboard</a> <!-- Link untuk dashboard pengguna -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Menu
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ route('dashboardUsers') }}">Dashboard</a>
+                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                   onclick="event.preventDefault();
+                                             document.getElementById('logout-form').submit();">
+                                    Keluar
+                                </a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    @csrf
+                                </form>
+                            </div>
                         </li>
                         @else
                             <li class="nav-item">
@@ -79,12 +92,12 @@
      <script>
          $(document).ready(function () {
              $(document).keydown(function (e) {
-                 if (e.which === 123) { 
+                 if (e.which === 123) {
                      return false;
                  }
              });
-             
-     
+
+
              $(document).on("contextmenu", function (e) {
                  e.preventDefault(); // Blokir klik kanan
                  alert('Maaf Gamar Tidak Bisa di Inpect');
