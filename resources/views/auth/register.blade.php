@@ -1,99 +1,132 @@
-<!-- resources/views/auth/register.blade.php -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <div class="bg-white rounded-lg shadow-2xl p-8 w-full max-w-md">
+        <!-- Header -->
+        <div class="text-center mb-8">
+            <h1 class="text-3xl font-bold text-gray-800">Create Your Account</h1>
+            <p class="text-gray-600">Join us and start your journey</p>
+        </div>
 
-@extends('layouts.app')
+        <!-- Form -->
+        <form method="POST" action="{{ route('register') }}" class="grid grid-cols-2 gap-4">
+            @csrf
 
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
-
-                <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
-                        @csrf
-
-                        <!-- Username Field -->
-                        <div class="row mb-3">
-                            <label for="username" class="col-md-4 col-form-label text-md-end">{{ __('Username') }}</label>
-                            <div class="col-md-6">
-                                <input id="username" type="text" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" required>
-                                @error('username')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <label for="namalengkap" class="col-md-4 col-form-label text-md-end">{{ __('namalengkap') }}</label>
-                            <div class="col-md-6">
-                                <input id="namalengkap" type="text" class="form-control @error('namalengkap') is-invalid @enderror" name="namalengkap" value="{{ old('namalengkap') }}" required>
-                                @error('namalengkap')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <!-- Email Field -->
-                        <div class="row mb-3">
-                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required>
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <!-- Password Field -->
-                        <div class="row mb-3">
-                            <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required>
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <!-- Confirm Password Field -->
-                        <div class="row mb-3">
-                            <label for="password_confirmation" class="col-md-4 col-form-label text-md-end">{{ __('Confirm Password') }}</label>
-                            <div class="col-md-6">
-                                <input id="password_confirmation" type="password" class="form-control" name="password_confirmation" required>
-                            </div>
-                        </div>
-
-                        <!-- Alamat Field -->
-                        <div class="row mb-3">
-                            <label for="alamat" class="col-md-4 col-form-label text-md-end">{{ __('Address') }}</label>
-                            <div class="col-md-6">
-                                <textarea id="alamat" class="form-control @error('alamat') is-invalid @enderror" name="alamat">{{ old('alamat') }}</textarea>
-                                @error('alamat')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <!-- Submit Button -->
-                        <div class="row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">{{ __('Register') }}</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
+            <!-- Username Field -->
+            <div class="col-span-2">
+                <label for="username" class="block text-sm font-medium text-gray-700 mb-2">Username</label>
+                <input
+                    id="username"
+                    type="text"
+                    name="username"
+                    value="{{ old('username') }}"
+                    {{-- required --}}
+                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
+                    placeholder="Enter your username"
+                />
+                @error('username')
+                    <p class="text-sm text-red-500 mt-2">{{ $message }}</p>
+                @enderror
             </div>
+
+            <!-- Nama Lengkap Field -->
+            <div class="col-span-2">
+                <label for="namalengkap" class="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
+                <input
+                    id="namalengkap"
+                    type="text"
+                    name="namalengkap"
+                    value="{{ old('namalengkap') }}"
+                    {{-- required --}}
+                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
+                    placeholder="Enter your full name"
+                />
+                @error('namalengkap')
+                    <p class="text-sm text-red-500 mt-2">{{ $message }}</p>
+                @enderror
+            </div>
+
+            <!-- Email Field -->
+            <div class="col-span-2">
+                <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
+                <input
+                    id="email"
+                    type="email"
+                    name="email"
+                    value="{{ old('email') }}"
+                    {{-- required --}}
+                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
+                    placeholder="Enter your email"
+                />
+                @error('email')
+                    <p class="text-sm text-red-500 mt-2">{{ $message }}</p>
+                @enderror
+            </div>
+
+            <!-- Password Field -->
+            <div class="col-span-1">
+                <label for="password" class="block text-sm font-medium text-gray-700 mb-2">Password</label>
+                <input
+                    id="password"
+                    type="password"
+                    name="password"
+                    {{-- required --}}
+                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
+                    placeholder="Enter your password"
+                />
+                @error('password')
+                    <p class="text-sm text-red-500 mt-2">{{ $message }}</p>
+                @enderror
+            </div>
+
+            <!-- Confirm Password Field -->
+            <div class="col-span-1">
+                <label for="password_confirmation" class="block text-sm font-medium text-gray-700 mb-2">Confirm Password</label>
+                <input
+                    id="password_confirmation"
+                    type="password"
+                    name="password_confirmation"
+                    {{-- required --}}
+                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
+                    placeholder="Confirm your password"
+                />
+            </div>
+
+            <!-- Alamat Field -->
+            <div class="col-span-2">
+                <label for="alamat" class="block text-sm font-medium text-gray-700 mb-2">Address</label>
+                <textarea
+                    id="alamat"
+                    name="alamat"
+                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
+                    placeholder="Enter your address"
+                >{{ old('alamat') }}</textarea>
+                @error('alamat')
+                    <p class="text-sm text-red-500 mt-2">{{ $message }}</p>
+                @enderror
+            </div>
+
+            <!-- Submit Button -->
+            <div class="col-span-2">
+                <button
+                    type="submit"
+                    class="w-full bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all"
+                >
+                    Register
+                </button>
+            </div>
+        </form>
+
+        <!-- Login Link -->
+        <div class="text-center mt-6">
+            <p class="text-sm text-gray-600">Already have an account? <a href="{{ route('login') }}" class="text-blue-500 hover:underline">Login here</a></p>
         </div>
     </div>
-</div>
-@endsection
+</body>
+</html>

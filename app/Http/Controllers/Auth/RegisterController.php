@@ -26,14 +26,23 @@ class RegisterController extends Controller
             'password' => 'required|min:2|confirmed',
             'namalengkap' => 'required|max:255',
             'alamat' => 'nullable|string',
+        ], [
+            'username.required' => 'Username harus diisi.',
+            'email.required' => 'Email harus diisi.',
+            'password.required' => 'Password harus diisi.',
+            'namalengkap.required' => 'Nama lengkap harus diisi.',
         ]);
 
-        // Check if the validation fails
         if ($validator->fails()) {
-            return redirect()->back()
-                ->withErrors($validator)
-                ->withInput();
+            return redirect()->back()->withErrors($validator)->withInput();
         }
+
+        // Check if the validation fails
+        // if ($validator->fails()) {
+        //     return redirect()->back()
+        //         ->withErrors($validator)
+        //         ->withInput();
+        // }
 
         // Creating the user if validation passes
         $user = User::create([

@@ -13,7 +13,7 @@ use App\Http\Controllers\UserController;
 Route::resource('albums', AlbumController::class);
 
 // Rute untuk Foto (Hanya untuk pengguna yang sudah login)
-Route::resource('fotos', FotosController::class)->middleware('auth');
+Route::resource('fotos', FotosController::class);
 Route::get('/search', [FotosController::class, 'search'])->name('fotos.search');
 
 // Routes untuk komentar

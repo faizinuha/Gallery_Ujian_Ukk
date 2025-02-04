@@ -66,11 +66,11 @@ class FotosController extends Controller
     public function show($id)
     {
         $foto = Foto::findOrFail($id);
-        $fotos = Foto::all();
+        $fotos = Foto::where('FotoId', '!=', $foto->FotoID)->get();
         $komentars = KomentarFoto::where('FotoID', $id)->get(); // Mengambil semua komentar untuk foto tertentu
         return view('fotos.show', compact('foto', 'komentars','fotos')); // Pastikan untuk memakai plural untuk komentar
     }
-    
+
     // Menampilkan form untuk mengedit foto
     public function edit($id)
     {
