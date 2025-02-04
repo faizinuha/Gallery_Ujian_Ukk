@@ -18,9 +18,11 @@
                 <div class="col-xl-8 col-lg-7 col-md-6 col-sm-12">
                     <div class="col-xl-8 col-lg-7 col-md-6 col-sm-12">
                         @foreach ($albums as $index => $album)
-                            @if ($index % 2 == 0)  <!-- Menampilkan setiap album dengan indeks genap -->
+                            @if ($index % 2 == 0)
+                                <!-- Menampilkan setiap album dengan indeks genap -->
                                 @forelse ($album->fotos as $foto)
-                                    <img src="{{ asset('storage/' . $foto->LokasiFile) }}" alt="{{ $foto->JudulFoto }}" class="img-fluid">
+                                    <img src="{{ asset('storage/' . $foto->LokasiFile) }}" alt="{{ $foto->JudulFoto }}"
+                                        class="img-fluid">
                                 @empty
                                     <p>Belum ada foto untuk album ini.</p>
                                 @endforelse
@@ -31,11 +33,11 @@
                 <div class="col-xl-4 col-lg-5 col-md-6 col-sm-12">
                     <div class="tm-bg-gray tm-video-details">
                         <p class="mb-4">
-                             support Kami <a href="https://saweria.co/C02V" target="_parent"
-                                rel="sponsored">donation Saweria </a>
+                            support Kami <a href="https://saweria.co/C02V" target="_parent" rel="sponsored">donation Saweria
+                            </a>
                         </p>
                         <div class="text-center mb-5">
-                            <a href="{{route('dashboard')}}" class="btn btn-primary tm-btn-big">Download</a>
+                            <a href="{{ route('dashboard') }}" class="btn btn-primary tm-btn-big">Download</a>
                         </div>
                         <div class="mb-4 d-flex flex-wrap">
                             <div class="mr-4 mb-2">
@@ -73,67 +75,43 @@
             <div class="row mb-3 tm-gallery">
                 @forelse ($albums as $album)
                     <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
-                        <!-- Card Header: Album Title -->
-                        <div class="card-header text-center">
-                            <h3 class="mb-0">{{ $album->NamaAlbum }}</h3>
-                            <!-- Tambahkan tombol View All di bawah judul album -->
-                            <a href="{{ route('albums.show', $album) }}" class="btn btn-primary mt-3">View All</a>
-                        </div>
+                        <div class="card shadow-sm rounded-lg border-0">
+                            <!-- Card Header: Album Title -->
+                            <div class="card-header text-center bg-white border-0">
+                                <h3 class="mb-2 font-weight-bold">{{ $album->NamaAlbum }}</h3>
+                                <a href="{{ route('albums.show', $album) }}" class="btn btn-primary mt-2 w-75"
+                                    style="background-color: #008080; border: none; transition: 0.3s;">
+                                    View All
+                                </a>
+                            </div>
 
-                        <!-- Card Body: Photos -->
-                        <div class="card-body">
-                            <div class="row">
-                                @foreach ($album->fotos as $index => $photo)
-                                    @if ($index % 2 == 0)
-                                        <!-- Untuk gambar pertama dan kedua (Tanpa Card untuk gambar pertama) -->
-                                        <div class="col-6 mb-3">
-                                            <!-- Gambar pertama dengan dekorasi -->
-                                            <figure class="effect-ming tm-video-item photo-first">
+                            <!-- Card Body: Photos -->
+                            <div class="card-body">
+                                <div class="row">
+                                    @foreach ($album->fotos as $index => $photo)
+                                        <div class="col-12 mb-3">
+                                            <figure class="effect-ming tm-video-item">
                                                 <img src="{{ asset('storage/' . $photo->LokasiFile) }}"
-                                                    alt="{{ $photo->JudulFoto }}" class="img-fluid rounded">
+                                                    alt="{{ $photo->JudulFoto }}" class="img-fluid rounded shadow-sm"
+                                                    style="height: 180px; width: 100%; object-fit: cover;">
                                                 <figcaption class="d-flex align-items-center justify-content-center">
-                                                    <h2>{{ $photo->JudulFoto }}</h2>
+                                                    <h5 class="text-white font-weight-bold">{{ $photo->JudulFoto }}</h5>
                                                 </figcaption>
                                             </figure>
-                                            <div class="d-flex justify-content-between tm-text-gray">
-                                                <span class="tm-text-gray-black">
-                                                    {{ \Carbon\Carbon::parse($photo->TanggalUnggah)->format('d-m-Y') }}
-                                                </span>
+                                            <div class="text-center text-muted mt-2">
+                                                <small>{{ \Carbon\Carbon::parse($photo->TanggalUnggah)->format('d-m-Y') }}</small>
                                             </div>
                                         </div>
-                                    @endif
-                                @endforeach
-                            </div>
-                            <div class="row">
-                                @foreach ($album->fotos as $index => $photo)
-                                    @if ($index % 1 != 0)
-                                        <!-- Untuk gambar kedua dan seterusnya (Menggunakan Card) -->
-                                        <div class="col-6 mb-3">
-                                            <div class="album-card shadow-sm rounded">
-                                                <figure class="effect-ming tm-video-item">
-                                                    <img src="{{ asset('storage/' . $photo->LokasiFile) }}"
-                                                        alt="{{ $photo->JudulFoto }}" class="img-fluid rounded">
-                                                    <figcaption class="d-flex align-items-center justify-content-center">
-                                                        <h2>{{ $photo->JudulFoto }}</h2>
-                                                        <a href="{{ route('fotos.show', $photo->FotoID) }}">View more</a>
-                                                    </figcaption>
-                                                </figure>
-                                                <div class="d-flex justify-content-between tm-text-gray">
-                                                    <span class="tm-text-gray-black">
-                                                        {{ \Carbon\Carbon::parse($photo->TanggalUnggah)->format('d-m-Y') }}
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    @endif
-                                @endforeach
+                                    @endforeach
+                                </div>
                             </div>
                         </div>
                     </div>
                 @empty
-                    <p>Belum ada album.</p>
+                    <p class="text-center w-100">Belum ada album.</p>
                 @endforelse
             </div>
+
             <style>
                 /* Dekorasi untuk gambar pertama */
                 .photo-first img {

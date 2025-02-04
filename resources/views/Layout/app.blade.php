@@ -32,9 +32,6 @@
                         <a class="nav-link nav-link-1" aria-current="page" href="{{route('about')}}">Tentang</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link nav-link-1" aria-current="page" href="#">All</a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link nav-link-3" href="{{ route('album') }}">Album</a>
                     </li>
                     <li class="nav-item">

@@ -3,9 +3,10 @@
         <div class="row">
             <div class="col-lg-6 col-md-12 col-12 px-5 mb-5">
                 <h3 class="tm-text-primary mb-4 tm-footer-title">Tentang GalleryX</h3>
-                <p>GalleryX adalah platform yang memungkinkan semua pengguna untuk berbagi dan menikmati berbagai koleksi gambar dan wallpaper secara gratis, tanpa batasan. Nikmati pengalaman berbagi tanpa gangguan iklan!  
-                    <a rel="sponsored" href="https://saweria.co/C02V">Donate Agar Maju Terima kasih!!</a> mendukung desain yang fleksibel, memungkinkan integrasi penuh dengan berbagai CMS dan kebutuhan website media.</p>
+                <p>GalleryX adalah platform yang memungkinkan semua pengguna untuk berbagi dan menikmati berbagai koleksi gambar dan wallpaper secara gratis, tanpa batasan. Nikmati pengalaman berbagi tanpa gangguan iklan!
+                     mendukung desain yang fleksibel, memungkinkan integrasi penuh dengan berbagai CMS dan kebutuhan website media.</p>
             </div>
+            {{-- <a rel="sponsored" href="https://saweria.co/C02V">Donate Agar Maju Terima kasih!!</a> --}}
             <div class="col-lg-3 col-md-6 col-sm-6 col-12 px-5 mb-5">
                 <h3 class="tm-text-primary mb-4 tm-footer-title">Navigasi</h3>
                 <ul class="tm-footer-links pl-0">

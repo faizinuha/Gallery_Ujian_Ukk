@@ -129,7 +129,7 @@
                 </div>
             </div>
         </div> <!-- row -->
-        <div class="row tm-mb-90">
+        {{-- <div class="row tm-mb-90">
             <div class="col-12 d-flex justify-content-between align-items-center tm-paging-col">
                 <!-- Previous Button -->
                 <a href="{{ $p->previousPageUrl() }}" class="btn btn-primary tm-btn-prev mb-2 {{ !$p->previousPageUrl() ? 'disabled' : '' }}">
@@ -150,7 +150,7 @@
                     Next Page
                 </a>
             </div>
-        </div>
+        </div> --}}
 
     </div> <!-- container-fluid, tm-container-content -->
     <style>

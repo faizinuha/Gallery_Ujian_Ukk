@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <h1>Hasil Pencarian untuk "{{ $query }}"</h1>
+    {{-- <h1>Hasil Pencarian untuk "{{ $query }}"</h1> --}}
 
     @if ($fotos->isEmpty())
         <p>Tidak ada hasil yang ditemukan.</p>
@@ -13,8 +13,8 @@
                     <div class="card">
                         <img src="{{ asset('storage/' . $foto->LokasiFile) }}" class="card-img-top" alt="{{ $foto->JudulFoto }}">
                         <div class="card-body">
-                            <h5 class="card-title">{{ $foto->JudulFoto }}</h5>
-                            <p class="card-text">{{ $foto->DeskripsiFoto }}</p>
+                            <h5 class="card-title">Judul:{{ $foto->JudulFoto }}</h5>
+                            <p class="card-text">Deskripsi:{{ $foto->DeskripsiFoto }}</p>
                             <a href="{{ route('fotos.show', $foto->FotoID) }}" class="btn btn-primary">Lihat Detail</a>
                         </div>
                     </div>

@@ -1,4 +1,4 @@
-@extends('layouts.app')
+    @extends('layouts.app')
 
 @section('content')
     <div class="container">
@@ -7,7 +7,7 @@
             @csrf
             <div class="form-group">
                 <label for="JudulFoto">Judul Foto</label>
-                <input type="text" name="JudulFoto" id="JudulFoto" class="form-control" required>
+                <input type="text" name="JudulFoto" id="JudulFoto" @enderror class="form-control" required>
             </div>
 
             <div class="form-group">

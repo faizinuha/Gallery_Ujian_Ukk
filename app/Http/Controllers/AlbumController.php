@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Models\Album;
@@ -20,31 +21,40 @@ class AlbumController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'NamaAlbum' => 'required|string|max:255',
-            'Deskripsi' => 'required',
-            'TanggalDibuat' => 'required|date',
-        ]);
+        $validatedData = $request->validate(
+            [
+                'NamaAlbum' => 'required|string|max:255|unique:albums,NamaAlbum',
+                'Deskripsi' => 'required|string',
+                'TanggalDibuat' => 'required|date',
+            ],
+            [
+                'NamaAlbum.required' => 'Nama album wajib diisi',
+                'NamaAlbum.unique' => 'Nama album sudah ada',
+                'Deskripsi.required' => 'Deskripsi wajib diisi',
+                'TanggalDibuat.required' => 'Tanggal dibuat wajib diisi',
+            ]
+        );
 
         Album::create([
-            'NamaAlbum' => $request->NamaAlbum,
-            'Deskripsi' => $request->Deskripsi,
-            'TanggalDibuat' => $request->TanggalDibuat,
+            'NamaAlbum' => $validatedData['NamaAlbum'],
+            'Deskripsi' => $validatedData['Deskripsi'],
+            'TanggalDibuat' => $validatedData['TanggalDibuat'],
             'UserID' => Auth::id(),
         ]);
 
         return redirect()->route('albums.index')->with('success', 'Album berhasil dibuat!');
     }
-        public function show($albumId)
-        {
-            // Ambil album berdasarkan ID
-            $album = Album::with('fotos')->findOrFail($albumId);
-    
-            // Kembalikan ke view album.show dengan membawa data album
-            return view('albums.show', compact('album'));
-        }
-    
-    
+
+    public function show($albumId)
+    {
+        // Ambil album berdasarkan ID
+        $album = Album::with('fotos')->findOrFail($albumId);
+
+        // Kembalikan ke view album.show dengan membawa data album
+        return view('albums.show', compact('album'));
+    }
+
+
 
     public function edit($id)
     {
