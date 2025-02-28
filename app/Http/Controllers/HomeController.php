@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Foto;
-use App\Models\album;
+use App\Models\Album;
 use Illuminate\Support\Facades\Http;
 
 class HomeController extends Controller
@@ -27,11 +27,11 @@ class HomeController extends Controller
     public function index()
     {
         // Retrieve albums and photos (modify as needed)
-        // $albums = Album::all();  // Get all albums
+        $albums = Album::all();  // Get all albums
         $photos = Foto::all();  // Get all photos
 
         // Pass data to the view
-        return view('user-management.index', compact('photos'));
+        return view('user-management.index', compact('albums', 'photos'));
     }
 
     // Add your other controller methods here...
