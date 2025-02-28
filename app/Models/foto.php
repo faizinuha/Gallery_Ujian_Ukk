@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 
 // Model Foto
-class Foto extends Model
+class foto extends Model
 {
     //Relations
 

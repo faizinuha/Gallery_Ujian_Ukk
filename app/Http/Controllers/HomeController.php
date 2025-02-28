@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Foto;
+use App\Models\foto;
 use App\Models\Album;
 use Illuminate\Support\Facades\Http;
 
