@@ -86,7 +86,7 @@
         });
     </script>
      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-     <script>
+     {{-- <script>
          $(document).ready(function () {
              $(document).keydown(function (e) {
                  if (e.which === 123) {
@@ -100,6 +100,6 @@
                  alert('Maaf Gamar Tidak Bisa di Inpect');
              });
          });
-     </script>
+     </script> --}}
 </body>
 </html>

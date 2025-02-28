@@ -27,11 +27,11 @@ class HomeController extends Controller
     public function index()
     {
         // Retrieve albums and photos (modify as needed)
-        $albums = Album::all();  // Get all albums
+        // $albums = Album::all();  // Get all albums
         $photos = Foto::all();  // Get all photos
 
         // Pass data to the view
-        return view('user-management.index', compact('albums', 'photos'));
+        return view('user-management.index', compact('photos'));
     }
 
     // Add your other controller methods here...
@@ -41,7 +41,7 @@ class HomeController extends Controller
         $p = Foto::paginate(12); // Get photos with pagination (12 per page)
         return view('dashboard_gallery.home', compact('a', 'p'));
     }
-
+// oke
     public function album()
     {
         // Mengambil semua album beserta foto terbaru terkait
