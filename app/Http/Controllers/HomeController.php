@@ -28,7 +28,7 @@ class HomeController extends Controller
     {
         // Retrieve albums and photos (modify as needed)
         $albums = Album::all();  // Get all albums
-        $photos = Foto::all();  // Get all photos
+        $photos = foto::all();  // Get all photos
 
         // Pass data to the view
         return view('user-management.index', compact('albums', 'photos'));
