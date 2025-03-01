@@ -10,21 +10,22 @@
 </head>
 <body>
 
-    <body>
-        @include('layout.style')
+    <div>
+        @include('Layout.style')
         <div class="layout-wrapper layout-content-navbar">
             <div class="layout-container">
-                @include('layout.app')
+                @include('Layout.app')
                 <div class="layout-page">
                     {{-- @include('layout.navbar') --}}
                     <div class="content-wrapper">
                         @yield('content')
-                        @include('layout.footer')
+                        @include('Layout.footer')
                     </div>
                 </div>
             </div>
-            <div class="layout-overlay layout-menu-toggle"></div>
         </div>
-        @include('layout.script')
-</body>
+        <div class="layout-overlay layout-menu-toggle"></div>
+    </div>
+    @include('Layout.script')
+</div>
 </html>
