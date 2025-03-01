@@ -4,7 +4,6 @@
 
 <body>
     @yield('content')
-
     @livewireScripts
 </body>
 
