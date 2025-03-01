@@ -1,4 +1,3 @@
-<footer class="tm-bg-gray pt-5 pb-3 tm-text-gray tm-footer">
     <div class="container-fluid tm-container-small">
         <div class="row">
             <div class="col-lg-6 col-md-12 col-12 px-5 mb-5">
